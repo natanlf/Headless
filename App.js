@@ -11,7 +11,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, AppRegistry} from 'react-native';
 
 const LogLocation = async (data) => {
-   alert("OK")
+   alert(JSON.stringify(data))
 }
 AppRegistry.registerHeadlessTask('LogLocation', () => LogLocation)
 

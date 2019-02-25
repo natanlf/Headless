@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.wifiservice.WifiService;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.content.Intent;
 import com.facebook.react.HeadlessJsTaskService;
@@ -48,12 +50,19 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
 
-        Intent service = new Intent(getApplicationContext(), WifiService.class);
-        Bundle bundle = new Bundle();
+    ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        bundle.putString("foo", "bar");
-        service.putExtras(bundle);
+    //if (mWifi.isConnected()) {
+      Intent service = new Intent(getApplicationContext(), WifiService.class);
+      Bundle bundle = new Bundle();
 
-        getApplicationContext().startService(service);
+      bundle.putString("foo", "bar");
+      service.putExtras(bundle);
+
+      getApplicationContext().startService(service);
+    //}
+
+
   }
 }
