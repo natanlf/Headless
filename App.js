@@ -10,8 +10,21 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, AppRegistry} from 'react-native';
 
+import PushNotificationAndroid  from 'react-native-push-notification'
+
 const LogLocation = async (data) => {
-   alert(JSON.stringify(data))
+
+    msg = "";
+
+   data.hasInternet ? msg="Conectado a internet" : msg="Desconectado da internet"
+
+    PushNotificationAndroid.localNotification({
+    //... You can use all the options from localNotifications
+    message: this.msg, // (required)
+    date: new Date(Date.now() + (60 * 1000)) // in 60 secs
+  });
+
+   //alert(JSON.stringify(data))
 }
 AppRegistry.registerHeadlessTask('LogLocation', () => LogLocation)
 
